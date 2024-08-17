@@ -1,8 +1,10 @@
 const {parse} = require('node:url')
+const routes = require('./routes/routes')
+const errorHandler = require('./exception/handler');
+const {join} = require('node:path')
 
 const allRoutes = routes()
-const errorHandler = require('./exception/handler');
-const routes = require('./routes/routes')
+
 
 async function handler(request, response) {
 
@@ -15,12 +17,13 @@ async function handler(request, response) {
         pathname
     } = parse(url, true)
 
-    const route = allRoutes[request.method] || allRoutes.default
+    const key = (method === 'GET' || method ==='DELETE') ? method : join(method,'::',pathname)
+    const route = allRoutes[key] || allRoutes.default
 
     try {
         await route(request, response);
-    } catch (response) {
-        errorHandler(response);
+    } catch (error) {
+        await errorHandler(error,response);
     }
 }
 
