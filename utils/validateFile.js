@@ -9,7 +9,10 @@ async function validateFile(filePath) {
         if(!stat.isFile()){
             throw new Exception(403,'forbidden')
         }
-        return stat
+        return {
+            fullPath: fullPath,
+            stat: stat
+        }
     } else {
         throw new Exception(404,"file not found");
     }

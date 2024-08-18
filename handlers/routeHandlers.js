@@ -7,9 +7,8 @@ async function createFile(request,response) {
 }
 
 async function getFile(request,response) {
-  const stat = await validateFile(request.url)
-  console.log(stat);
-  await sendFile(stat,response)
+  const fileInfo = await validateFile(request.url)
+  await sendFile(fileInfo,response)
   // response.writeHead(200, {"Content-Type": "text/plain"});
   // response.end("this is get")
 }
