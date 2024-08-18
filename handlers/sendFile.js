@@ -4,9 +4,9 @@ const mimeType = require('../utils/mimeType')
 const path = require("node:path");
 
 async function sendFile(fileInfo,response){
-  const ext = path.extname(fileInfo.fullPath)
+
   response.writeHead(200, {
-      'Content-Type': mimeType[ext],
+      'Content-Type': mimeType[fileInfo.ext],
       'Content-Length': fileInfo.stat.size
   })
 

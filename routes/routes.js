@@ -6,8 +6,8 @@ const routes = () => ({
     'GET': getFile,
     'PUT': updateFile,
     'DELETE': deleteFile,
-    default: async (request,response) => {
-        throw new Exception(405, "method not allowed");
+    default: async () => {
+        throw new Exception(404, "route not found");
     },
 })
 

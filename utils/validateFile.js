@@ -1,9 +1,12 @@
 const fs = require('fs')
-const {join} = require('node:path')
+const {join,parse} = require('node:path')
 const Exception = require('../exception/exception')
+const path = require("node:path");
 
-async function validateFile(filePath) {
-    const fullPath = join(__dirname,'..','files',filePath)
+async function validateFile(pathName) {
+
+    const fullPath = join(__dirname,'..','files',pathName)
+
     if (fs.existsSync(fullPath)) {
         const stat = fs.statSync(fullPath);
         if(!stat.isFile()){
@@ -11,7 +14,8 @@ async function validateFile(filePath) {
         }
         return {
             fullPath: fullPath,
-            stat: stat
+            stat: stat,
+            ext: path.extname(fullPath),
         }
     } else {
         throw new Exception(404,"file not found");
