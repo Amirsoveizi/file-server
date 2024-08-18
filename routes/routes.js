@@ -1,5 +1,5 @@
 const Exception = require("../exception/exception");
-const {createFile,getFile,updateFile,deleteFile} = require('../handlers/routesHandler')
+const {createFile,getFile,updateFile,deleteFile} = require('../handlers/routeHandlers')
 
 const routes = () => ({
     'POST\\::\\upload': createFile,

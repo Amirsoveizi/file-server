@@ -1,5 +1,5 @@
 const http = require('node:http');
-const handler = require('./handler');
+const handler = require('./handlers/index');
 
 const PORT = process.env.PORT || 3000
 
