@@ -17,7 +17,7 @@ async function handler(request, response) {
         pathname
     } = parse(url, true)
 
-    const key = (method === 'GET' || method ==='DELETE') ? method : join(method,'::',pathname)
+    const key = method === 'POST' ? join(method,'::',pathname) : method
     const route = allRoutes[key] || allRoutes.default
 
     try {
