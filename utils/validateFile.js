@@ -13,8 +13,9 @@ async function validateFile(pathName) {
             throw new Exception(403,'forbidden')
         }
         return {
+            name: pathName,
             fullPath: fullPath,
-            stat: stat,
+            size: stat.size,
             ext: path.extname(fullPath),
         }
     } else {
