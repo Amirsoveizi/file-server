@@ -5,7 +5,7 @@ async function errorHandler(error,response) {
         error: error.message || 'internal server error'
     }))
 
-    return response.end()
+    response.end()
 }
 
 module.exports = errorHandler;

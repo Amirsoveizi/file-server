@@ -1,11 +1,17 @@
+const validateFile = require('../utils/validateFile')
+const sendFile = require('./sendFile')
+
 async function createFile(request,response) {
   response.writeHead(200, {"Content-Type": "text/plain"});
   response.end("this is create");
 }
 
 async function getFile(request,response) {
-  response.writeHead(200, {"Content-Type": "text/plain"});
-  response.end("this is get")
+  const stat = await validateFile(request.url)
+  console.log(stat);
+  await sendFile(stat,response)
+  // response.writeHead(200, {"Content-Type": "text/plain"});
+  // response.end("this is get")
 }
 
 async function updateFile(request,response) {
