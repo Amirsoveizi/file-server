@@ -7,19 +7,20 @@ const fs = require('fs')
 async function saveFile(request,response,filename) {
   
   const bb = busboy({ headers: request.headers })
-  let pathToFile = null
+  let pathToFile = []
 
   bb.on('file', (name, file, info) => {
-    pathToFile = filename || random() + info.filename
-    const saveTo = join(__dirname,'..','files',pathToFile);
+    const _file = filename || random() + info.filename
+    pathToFile.push(_file)
+    const saveTo = join(__dirname,'..','files',_file);
     file.pipe(fs.createWriteStream(saveTo));
   });
 
   bb.on('close', () => {
     sendResponse(201,response,{
-      "path" : pathToFile.slice(1)
+      "path" : pathToFile
     })
-});
+  });
 
   request.pipe(bb);
 }
