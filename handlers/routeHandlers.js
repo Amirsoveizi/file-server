@@ -2,9 +2,10 @@ const fs = require("fs");
 const validateFile = require('../utils/validateFile')
 const mimeType = require("../utils/mimeType");
 const saveFile = require('../utils/saveFile')
+const sendResponse = require("../utils/sendResponse");
 
 module.exports.createFile = async function createFile(request,response) {
-  saveFile(request,response)
+  await saveFile(request, response)
 }
 
 module.exports.getFile = async function getFile(request,response) {
@@ -19,7 +20,7 @@ module.exports.getFile = async function getFile(request,response) {
 
 module.exports.updateFile = async function updateFile(request,response) {
   const fileInfo = await validateFile(request.url)
-  saveFile(request,response,fileInfo.name)
+  await saveFile(request, response, fileInfo.name)
 }
 
 module.exports.deleteFile = async function deleteFile(request,response) {
