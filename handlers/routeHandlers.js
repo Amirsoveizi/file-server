@@ -1,13 +1,10 @@
 const fs = require("fs");
-const { randomFillSync } = require('crypto');
-const busboy = require('busboy');
 const validateFile = require('../utils/validateFile')
-const sendResponse = require("../utils/sendResponse");
 const mimeType = require("../utils/mimeType");
+const saveFile = require('../utils/saveFile')
 
 module.exports.createFile = async function createFile(request,response) {
-  response.writeHead(200, {"Content-Type": "text/plain"});
-  response.end("this is create");
+  saveFile(request,response)
 }
 
 module.exports.getFile = async function getFile(request,response) {
@@ -22,7 +19,7 @@ module.exports.getFile = async function getFile(request,response) {
 
 module.exports.updateFile = async function updateFile(request,response) {
   const fileInfo = await validateFile(request.url)
-
+  saveFile(request,response,fileInfo.name)
 }
 
 module.exports.deleteFile = async function deleteFile(request,response) {
