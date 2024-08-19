@@ -10,7 +10,7 @@ async function saveFile(request,response,filename) {
   let pathToFile = []
 
   bb.on('file', (name, file, info) => {
-    const _file = filename || random() + info.filename
+    const _file = filename || random() + info.filename.replaceAll(' ','%20')
     pathToFile.push(_file)
     const saveTo = join(__dirname,'..','files',_file);
     file.pipe(fs.createWriteStream(saveTo));
