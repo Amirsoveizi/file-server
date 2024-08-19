@@ -1,4 +1,6 @@
 const fs = require("fs");
+const { randomFillSync } = require('crypto');
+const busboy = require('busboy');
 const validateFile = require('../utils/validateFile')
 const sendResponse = require("../utils/sendResponse");
 const mimeType = require("../utils/mimeType");
@@ -14,10 +16,8 @@ module.exports.getFile = async function getFile(request,response) {
     'Content-Type': mimeType[fileInfo.ext],
     'Content-Length': fileInfo.size
   })
-
   const readStream = fs.createReadStream(fileInfo.fullPath);
   readStream.pipe(response)
-
 }
 
 module.exports.updateFile = async function updateFile(request,response) {

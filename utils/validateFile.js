@@ -9,7 +9,7 @@ async function validateFile(pathName) {
 
     if (fs.existsSync(fullPath)) {
         const stat = fs.statSync(fullPath);
-        if(!stat.isFile()){
+        if(stat.isDirectory()){
             throw new Exception(403,'forbidden')
         }
         return {
